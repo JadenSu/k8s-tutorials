@@ -1,0 +1,17 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: hellok8s-deployment
+spec:
+  replicas: 1 # POD 的副本数量
+  selector: # deployment和 POD的关联方式
+    matchLabels: # deployment会管理标签为hellok8s的POD
+      app: hellok8s
+  template: #定义POD的资源
+    metadata: # 这里没有NAM 是因为POD的是唯一的，这里deployment会自动生成POD的name
+      labels:
+        app: hellok8s
+    spec: #这里就是POD模板使用的镜像资源
+      containers:
+        - name: hellok8s-container 
+          image: dockershq/hellok8s:v1
